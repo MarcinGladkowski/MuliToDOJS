@@ -10,7 +10,8 @@ $(document).ready(function() {
             dataType : 'json'
         })
         .done(ret => {
-            ret.tasks.forEach((element, i) => {
+            ret.forEach((element, i) => {
+                console.log(element);
                createTaskLi(element, i); 
             });
             addClickEvent($('.todo-list li'));
@@ -32,7 +33,7 @@ $(document).ready(function() {
         }
 
         let li = $(`
-                <li id="${i}" data-complete=${dataComplete} class="${complete}">
+                <li id="${task._id}" data-queue=${i} data-complete=${dataComplete} class="${complete}">
                     <div class="view">
                         <input class="toggle" type="checkbox" ${checked}>
                         <label>${task.title}</label>
@@ -57,8 +58,8 @@ $(document).ready(function() {
             },
             dataType: 'json'
           }).done(ret => {
-              let lastLiIndex = ret.tasks.length - 1;
-              $('.todo-list li:last-child').attr('id', lastLiIndex);
+              $('.todo-list li:last-child').attr('data-queue', $('.todo-list li').length -1);
+              $('.todo-list li:last-child').attr('id', ret._id);
           })
     }
 
@@ -71,6 +72,8 @@ $(document).ready(function() {
              }
 
             newTask(url, taskModel);
+
+
             createTaskLi(taskModel); 
             newTaskInp.val('');
             addClickEvent($('.todo-list li'));
@@ -145,7 +148,7 @@ $(document).ready(function() {
 
             i = 0;
             for(let li of loadedLi){
-                li.id = i;
+                li.queue = i;
                 i++;
             }
     }

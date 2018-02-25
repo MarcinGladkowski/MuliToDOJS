@@ -1,41 +1,44 @@
 const express = require('express');
 const router = express.Router();
-const Task = require('./../model/Task.js');
+const Task = require('../model/Task.js');
 
 router.get('/task', (req, res) => {
-    
-    reader.readFile().then(
-        val => res.send(val)
-    );
-    
+   
+    Task.find({}, function(err, tasks) {
+        res.send(tasks);  
+      });
+ 
 });
 
 router.post('/task', (req, res) => {
 
-    let newTask = req.body;
+    let newTask = new Task();
 
-    Task.create(newTask, function(err){
-        if (err) {
-            throw err
+    newTask.title = req.body.title;
+    newTask.completed = req.body.completed;
+
+    newTask.save(function (err, task) {
+        if (err){
+            res.send("Error");
         } else {
-           console.log('GET API CALLED, Data Sent!');
-            res.send(JSON.stringify({'status':'ok'}));
+            res.json(task);
         }
-    })
-
+      });
 });
 
 router.delete('/task', (req, res) => {
-
-    let eventTask = req.body;
-
-   
+    Task.remove({ _id: req.body.id }, function (err) {
+        if (err){
+            res.send("Error");
+        } else {
+            res.send({"status" : "ok"});
+        }
+      });   
 });
 
 router.put('/task', (req, res) => {
 
     let eventTask = req.body;
-    
 
 });
 
