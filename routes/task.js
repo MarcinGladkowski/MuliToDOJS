@@ -1,6 +1,6 @@
-const reader = require('../reader/reader.js');
 const express = require('express');
 const router = express.Router();
+const Task = require('./../model/Task.js');
 
 router.get('/task', (req, res) => {
     
@@ -14,15 +14,14 @@ router.post('/task', (req, res) => {
 
     let newTask = req.body;
 
-    reader.readFile().then(
-        (taskList) => {
-            return JSON.stringify({ "tasks" : [...taskList.tasks, newTask]});
+    Task.create(newTask, function(err){
+        if (err) {
+            throw err
+        } else {
+           console.log('GET API CALLED, Data Sent!');
+            res.send(JSON.stringify({'status':'ok'}));
         }
-    ).then((result) => {
-        reader.writeFile(result).then(
-            result => res.send(result)
-        );
-    });
+    })
 
 });
 
@@ -30,36 +29,14 @@ router.delete('/task', (req, res) => {
 
     let eventTask = req.body;
 
-    reader.readFile().then(
-        (taskList) => {
-            taskList.tasks.splice(eventTask.id, 1);
-            return JSON.stringify({ "tasks" : [...taskList.tasks]});
-        }
-    ).then((result) => {
-        reader.writeFile(result).then(
-            result => res.send(result)
-        );
-    });
-
+   
 });
 
 router.put('/task', (req, res) => {
 
     let eventTask = req.body;
     
-    reader.readFile().then(
-        (taskList) => {
-            let finded = taskList.tasks[eventTask.id];
-            finded.completed = eventTask.value;
-            return JSON.stringify({ "tasks" : [...taskList.tasks]});
-        }
-    ).then((result) => {
-        reader.writeFile(result).then(
-            result => res.send(result)
-        );
-    });
 
-   
 });
 
 module.exports = router
