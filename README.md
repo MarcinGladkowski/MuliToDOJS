@@ -12,6 +12,5 @@ FrontEnd - JavaScript using simple ES6
 ```
 NodeJS
 MongoDB
-Save tasks in file (JSON format)
 FrontEnd - JavaScript using simple ES6
 ```
