@@ -1,65 +1,63 @@
-const reader = require('../reader/reader.js');
 const express = require('express');
 const router = express.Router();
+const Task = require('../model/Task.js');
 
 router.get('/task', (req, res) => {
-    
-    reader.readFile().then(
-        val => res.send(val)
-    );
-    
+   
+    Task.find({}, function(err, tasks) {
+        res.send(tasks);  
+      });
+ 
 });
 
 router.post('/task', (req, res) => {
 
-    let newTask = req.body;
+    let newTask = new Task();
 
-    reader.readFile().then(
-        (taskList) => {
-            return JSON.stringify({ "tasks" : [...taskList.tasks, newTask]});
+    newTask.title = req.body.title;
+    newTask.completed = req.body.completed;
+
+    newTask.save(function (err, task) {
+        if (err){
+            res.send("Error");
+        } else {
+            res.json(task);
         }
-    ).then((result) => {
-        reader.writeFile(result).then(
-            result => res.send(result)
-        );
-    });
-
+      });
 });
 
 router.delete('/task', (req, res) => {
-
-    let eventTask = req.body;
-
-    reader.readFile().then(
-        (taskList) => {
-            taskList.tasks.splice(eventTask.id, 1);
-            return JSON.stringify({ "tasks" : [...taskList.tasks]});
+    Task.remove({ _id: req.body.id }, function (err) {
+        if (err){
+            res.send("Error");
+        } else {
+            res.send({"status" : "ok"});
         }
-    ).then((result) => {
-        reader.writeFile(result).then(
-            result => res.send(result)
-        );
-    });
-
+      });   
 });
 
 router.put('/task', (req, res) => {
 
-    let eventTask = req.body;
-    
-    reader.readFile().then(
-        (taskList) => {
-            let finded = taskList.tasks[eventTask.id];
-            finded.completed = eventTask.value;
-            return JSON.stringify({ "tasks" : [...taskList.tasks]});
-        }
-    ).then((result) => {
-        reader.writeFile(result).then(
-            result => res.send(result)
-        );
-    });
+    let value = req.body.value;
 
-   
+    Task.findById(req.body.id, function(err, task){
+
+        if(err){
+            res.send(err);
+        } else {
+
+            task.completed = value;
+            
+            task.save(function (err, task) {
+                if (err){
+                    res.send("Error");
+                } else {
+                    res.json(task);
+                }
+            });
+        }
+
+    }); 
 });
 
 module.exports = router
