@@ -11,11 +11,17 @@
     app.controller('MainCtrl', [ '$scope', 'task', function($scope, task){
 
         $scope.tasks = [];
+        $scope.task = {};
 
         task.getTasks(function(data){
             $scope.tasks = data;
-        })
+        });
 
+        $scope.addTask = function(event){
+            if (event.which === 13){
+                $scope.task = {};
+            };
+        };
     }]);
 
 })();
