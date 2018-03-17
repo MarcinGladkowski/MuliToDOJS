@@ -1,5 +1,10 @@
-var app = angular.module('toDoApp', []);
+(function(){
 
-app.controller('MainCtrl', function($scope){
-    console.log('test');
-});
+    var app = angular.module('toDoApp', ['taskService']);
+
+    app.controller('MainCtrl', [ '$scope', function($scope){
+        console.log('test');
+    }]);
+
+})();
+
