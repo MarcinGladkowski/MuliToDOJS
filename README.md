@@ -5,6 +5,13 @@
 #### master 
 ```
 NodeJS
+MongoDB
+FrontEnd - AngularJS 1.6.9
+```
+
+#### simpleToDoO 
+```
+NodeJS
 Save tasks in file (JSON format)
 FrontEnd - JavaScript using simple ES6
 ```
