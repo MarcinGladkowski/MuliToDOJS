@@ -19,6 +19,12 @@
 
         $scope.addTask = function(event){
             if (event.which === 13){
+                $scope.task.completed = false;
+
+                task.createTask($scope.task, function(data){
+                    $scope.tasks.push(data);
+                });
+
                 $scope.task = {};
             };
         };

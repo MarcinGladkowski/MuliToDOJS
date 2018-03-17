@@ -17,8 +17,24 @@
             });
         }
 
+        var _createTask = function(task, callback){
+
+            var callback = callback||function(){};
+
+            $http({
+                method: 'POST',
+                url: "http://localhost:3000/task",
+                data: task
+            })
+            .then(function(response) {
+                callback(response.data);
+            });
+
+        }
+
         return {
-            getTasks: _getTasks
+            getTasks: _getTasks,
+            createTask: _createTask
         }
     
     });
