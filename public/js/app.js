@@ -2,8 +2,8 @@
 
     var app = angular.module('toDoApp', ['taskService']);
 
-    app.controller('MainCtrl', [ '$scope', function($scope){
-        console.log('test');
+    app.controller('MainCtrl', [ '$scope', 'task', function($scope, task){
+        console.log(task);
     }]);
 
 })();
