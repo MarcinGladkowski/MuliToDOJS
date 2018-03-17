@@ -10,9 +10,10 @@
 
     app.controller('MainCtrl', [ '$scope', 'task', function($scope, task){
 
+        $scope.tasks = [];
 
         task.getTasks(function(data){
-            console.log(data);
+            $scope.tasks = data;
         })
 
     }]);
