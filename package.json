@@ -9,10 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "body-parser": "^1.18.2",
-    "express": "^4.16.2",
-    "jquery": "^3.3.1",
-    "mongoose": "^5.0.7",
-    "path": "^0.12.7"
+    "angular": "^1.6.9",
+    "jquery": "^3.3.1"
   }
 }
