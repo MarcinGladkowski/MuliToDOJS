@@ -7,7 +7,14 @@ npm install
 I prefer to use nodemon in local enviroment (to start: nodemon server.js)
 I am using connection to db by moongose with db on mlab.com (you can use loval MongoDB database)
 
-#### master 
+#### master (under construction)
+```
+NodeJS
+MongoDB
+FrontEnd - React
+```
+
+#### angularJS 
 ```
 NodeJS
 MongoDB
