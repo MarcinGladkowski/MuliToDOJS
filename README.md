@@ -2,6 +2,11 @@
 
 ## Every branch is specify resolve of project
 
+To start:
+npm install
+I prefer to use nodemon in local enviroment (to start: nodemon server.js)
+I am using connection to db by moongose with db on mlab.com (you can use loval MongoDB database)
+
 #### master 
 ```
 NodeJS
