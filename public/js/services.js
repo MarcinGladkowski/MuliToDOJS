@@ -2,7 +2,7 @@
 
     var app = angular.module('taskService', []);
 
-    app.factory('task', function($http){
+    app.factory('taskManager', function($http){
         
        var _getTasks = function(callback){
 
@@ -32,11 +32,11 @@
 
         }
 
-        var _editTask = function(task, callback){
+        var _updateTask = function(task, callback){
             var callback = callback||function(){};
 
             $http({
-                method: 'POST',
+                method: 'PUT',
                 url: "http://localhost:3000/task",
                 data: task
             })
@@ -47,7 +47,8 @@
 
         return {
             getTasks: _getTasks,
-            createTask: _createTask
+            createTask: _createTask,
+            updateTask: _updateTask
         }
     
     });

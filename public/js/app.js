@@ -8,12 +8,12 @@
         }
     ]);
 
-    app.controller('MainCtrl', [ '$scope', 'task', function($scope, task){
+    app.controller('MainCtrl', [ '$scope', 'taskManager', function($scope, taskManager){
 
         $scope.tasks = [];
         $scope.task = {};
 
-        task.getTasks(function(data){
+        taskManager.getTasks(function(data){
             $scope.tasks = data;
         });
 
@@ -21,8 +21,8 @@
             if (event.which === 13){
                 $scope.task.completed = false;
 
-                task.createTask($scope.task, function(data){
-                    task.getTasks(function(data){
+                taskManager.createTask($scope.task, function(data){
+                    taskManagerv.getTasks(function(data){
                         $scope.tasks = data;
                     });
                 });
@@ -33,7 +33,7 @@
 
         $scope.editTask = function(task){
 
-            task.editTask(task, function(data){
+            taskManager.updateTask(task, function(data){
 
             });
         }

@@ -38,26 +38,28 @@ router.delete('/task', (req, res) => {
 
 router.put('/task', (req, res) => {
 
-    let value = req.body.value;
+    console.log(req.body);
 
-    Task.findById(req.body.id, function(err, task){
+    // let value = req.body.value;
 
-        if(err){
-            res.send(err);
-        } else {
+    // Task.findById(req.body.id, function(err, task){
 
-            task.completed = value;
+    //     if(err){
+    //         res.send(err);
+    //     } else {
+
+    //         task.completed = value;
             
-            task.save(function (err, task) {
-                if (err){
-                    res.send("Error");
-                } else {
-                    res.json(task);
-                }
-            });
-        }
+    //         task.save(function (err, task) {
+    //             if (err){
+    //                 res.send("Error");
+    //             } else {
+    //                 res.json(task);
+    //             }
+    //         });
+    //     }
 
-    }); 
+    // }); 
 });
 
 module.exports = router
