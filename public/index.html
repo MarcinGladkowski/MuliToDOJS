@@ -20,9 +20,9 @@
         <label for="toggle-all">Mark all as complete</label>
         <ul class="todo-list">
             <!-- TO DO LIST -->
-            <li ng-repeat="task in tasks" ng-class="{completed: task.completed}">
+            <li data-id="{{ task._id }}" ng-repeat="task in tasks" ng-class="{completed: task.completed}">
                 <div class="view">
-                    <input class="toggle" type="checkbox" checked>
+                    <input ng-click="editTask(task)" ng-model="task.completed" class="toggle" type="checkbox">
                     <label>{{ task.title }}</label>
                     <button class="destroy"></button>
                 </div>

@@ -22,12 +22,23 @@
                 $scope.task.completed = false;
 
                 task.createTask($scope.task, function(data){
-                    $scope.tasks.push(data);
+                    task.getTasks(function(data){
+                        $scope.tasks = data;
+                    });
                 });
 
                 $scope.task = {};
             };
         };
+
+        $scope.editTask = function(task){
+
+            task.editTask(task, function(data){
+
+            });
+        }
+
+
     }]);
 
 })();
