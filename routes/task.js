@@ -3,11 +3,9 @@ const router = express.Router();
 const Task = require('../model/Task.js');
 
 router.get('/task', (req, res) => {
-   
     Task.find({}, function(err, tasks) {
-        res.send(tasks);  
-      });
- 
+        res.status(200).send(tasks);  
+    });
 });
 
 router.post('/task', (req, res) => {
@@ -18,48 +16,24 @@ router.post('/task', (req, res) => {
     newTask.completed = req.body.completed;
 
     newTask.save(function (err, task) {
-        if (err){
-            res.send("Error");
-        } else {
-            res.json(task);
-        }
+        if (err) return res.send(500, { error: err });
+        return res.status(200).send('ok');
       });
 });
 
-router.delete('/task', (req, res) => {
-    Task.remove({ _id: req.body.id }, function (err) {
-        if (err){
-            res.send("Error");
-        } else {
-            res.send({"status" : "ok"});
-        }
+router.delete('/task/:taskId', (req, res) => {
+
+    Task.remove({ _id: req.params.taskId }, function (err) {
+        if (err) return res.send(500, { error: err });
+        return res.status(200).send('ok');
       });   
 });
 
 router.put('/task', (req, res) => {
-
-    console.log(req.body);
-
-    // let value = req.body.value;
-
-    // Task.findById(req.body.id, function(err, task){
-
-    //     if(err){
-    //         res.send(err);
-    //     } else {
-
-    //         task.completed = value;
-            
-    //         task.save(function (err, task) {
-    //             if (err){
-    //                 res.send("Error");
-    //             } else {
-    //                 res.json(task);
-    //             }
-    //         });
-    //     }
-
-    // }); 
+    Task.findByIdAndUpdate(req.body._id, req.body, {new: true}, function(err, model){
+        if (err) return res.send(500, { error: err });
+        return res.status(200).send('ok');
+    }); 
 });
 
 module.exports = router

@@ -22,9 +22,11 @@
                 $scope.task.completed = false;
 
                 taskManager.createTask($scope.task, function(data){
-                    taskManagerv.getTasks(function(data){
+
+                    taskManager.getTasks(function(data){
                         $scope.tasks = data;
                     });
+
                 });
 
                 $scope.task = {};
@@ -32,8 +34,15 @@
         };
 
         $scope.editTask = function(task){
+            taskManager.updateTask(task, function(data){});
+        }
 
-            taskManager.updateTask(task, function(data){
+        $scope.deleteTask = function(task){
+            taskManager.deleteTask(task, function(data){
+
+                taskManager.getTasks(function(data){
+                    $scope.tasks = data;
+                });
 
             });
         }

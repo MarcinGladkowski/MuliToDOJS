@@ -24,7 +24,7 @@
                 <div class="view">
                     <input ng-click="editTask(task)" ng-model="task.completed" class="toggle" type="checkbox">
                     <label>{{ task.title }}</label>
-                    <button class="destroy"></button>
+                    <button ng-click="deleteTask(task)" class="destroy"></button>
                 </div>
                 <input class="edit" value="Create a TodoMVC template">
             </li> 
