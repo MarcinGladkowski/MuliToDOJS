@@ -16,7 +16,7 @@ class App extends React.Component {
         return(
             <div>
                 <section className="todoapp">
-                    <Header />
+                  
                     <List />
                     <Footer />
                 </section>

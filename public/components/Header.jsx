@@ -4,12 +4,16 @@ import React from 'react';
 class Header extends React.Component{
     constructor(){
         super();
-        this.state = {};
+        this.state = {
+            title: ""
+        };
     }
 
     newTask(event){
         if(event.key === 'Enter'){
             console.log(event.target.value);
+            this.saveTask({title: event.target.value, completed: false});
+            this.setState({title: ""})
         }
     };
 
@@ -19,9 +23,8 @@ class Header extends React.Component{
             headers: { 
               'Accept': 'application/json',
               'Content-Type':'application/json' },
-            body: JSON.stringify({}),
-          })
-    
+            body: JSON.stringify(data)
+          });
     }
 
     render(){

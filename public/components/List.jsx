@@ -14,22 +14,48 @@ class List extends React.Component {
           };
     }
 
-    componentDidMount() {
+    loadTasks(){
         fetch("http://localhost:3000/task")
-          .then(res => res.json())
-          .then(
-            (result) => {
-              this.setState({
-                error: null,
-                isLoaded: true,
-                tasks: result
-              });
-            },
-          )
-      }
+        .then(res => res.json())
+        .then(
+          (result) => {
+            this.setState({
+              error: null,
+              isLoaded: true,
+              tasks: result
+            });
+          },
+        )
+    }
+
+    componentDidMount() {
+       this.loadTasks();
+    }
+
+    newTask(event){
+        if(event.key === 'Enter'){
+            this.saveTask({title: event.target.value, completed: false});
+            this.loadTasks();
+        }
+    };
+
+    saveTask(data){
+        fetch('http://localhost:3000/task', {
+            method: 'POST',
+            headers: { 
+              'Accept': 'application/json',
+              'Content-Type':'application/json' },
+            body: JSON.stringify(data)
+          });
+    }  
 
     render(){
         return( 
+            <div>
+                <div className="header">
+                    <h1>todos</h1>
+                    <input className="new-todo" onKeyPress={event => this.newTask(event)} placeholder="What needs to be done?"/>
+                </div>
                 <section className="main">
                     <input id="toggle-all" className="toggle-all" type="checkbox"/>
                     <label>Mark all as complete</label>
@@ -39,7 +65,7 @@ class List extends React.Component {
                             ))}
                         </ul>
                 </section>
-            
+            </div>
         )
     }
 }
