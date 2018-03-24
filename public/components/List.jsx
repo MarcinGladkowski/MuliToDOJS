@@ -15,9 +15,9 @@ class List extends React.Component {
                 <input id="toggle-all" className="toggle-all" type="checkbox"/>
                 <label>Mark all as complete</label>
                 <ul className="todo-list">
-                    <li data-id="#" className="completed">
+                    <li data-id="#" className="">
                         <div className="view">
-                            <input  className="toggle" type="checkbox"/>
+                            <input className="toggle" type="checkbox"/>
                             <label>Tytuł taska</label>
                             <button className="destroy"></button>
                         </div>
