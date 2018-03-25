@@ -7,7 +7,7 @@ import Footer from './Footer.jsx';
 import '../css/base.css';
 import '../css/index.css';
 
-class App extends React.Component {
+export default class App extends React.Component {
     constructor(){
         super();
     }
@@ -30,5 +30,3 @@ class App extends React.Component {
         )
     }
 };
-
-export default App;

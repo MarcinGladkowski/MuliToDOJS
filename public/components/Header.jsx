@@ -1,7 +1,6 @@
 import React from 'react';
 
-
-class Header extends React.Component{
+export default class Header extends React.Component{
     constructor(){
         super();
         this.state = {
@@ -11,7 +10,6 @@ class Header extends React.Component{
 
     newTask(event){
         if(event.key === 'Enter'){
-            console.log(event.target.value);
             this.saveTask({title: event.target.value, completed: false});
             this.setState({title: ""})
         }
@@ -36,5 +34,3 @@ class Header extends React.Component{
         )
     }
 }
-
-export default Header;

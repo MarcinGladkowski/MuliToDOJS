@@ -1,9 +1,12 @@
 import React from 'react';
 
-class Task extends React.Component {
+export default class Task extends React.Component {
     constructor(props){
         super(props);
-        this.state = {task: props.task}
+        this.state = {
+            task: props.task,
+
+        }
     }
 
     componentWillReceiveProps(props){
@@ -38,4 +41,3 @@ class Task extends React.Component {
     }
 }
 
-export default Task;

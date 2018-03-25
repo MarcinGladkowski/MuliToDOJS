@@ -4,19 +4,18 @@ import Task from './Task.jsx';
 import '../css/base.css';
 import '../css/index.css';
 
-class List extends React.Component {
+export default class List extends React.Component {
     constructor(props){
         super(props);
         this.state = {
             error: null,
             isLoaded: false,
-            tasks: []
+            tasks: [],
           };
         this.reloadList=this.reloadList.bind(this);
     }
 
     reloadList(){
-        console.log('callback working');
         this.loadTasks();
     }
 
@@ -42,6 +41,7 @@ class List extends React.Component {
         if(event.key === 'Enter'){
             this.saveTask({title: event.target.value, completed: false});
             this.loadTasks();
+            event.target.value = "";
         }
     };
 
@@ -60,7 +60,7 @@ class List extends React.Component {
             <div>
                 <div className="header">
                     <h1>todos</h1>
-                    <input className="new-todo" onKeyPress={event => this.newTask(event)} placeholder="What needs to be done?"/>
+                    <input type="text" className="new-todo" onKeyPress={event => this.newTask(event)} placeholder="What needs to be done?"/>
                 </div>
                 <section className="main">
                     <input id="toggle-all" className="toggle-all" type="checkbox"/>
@@ -75,5 +75,3 @@ class List extends React.Component {
         )
     }
 }
-
-export default List;
