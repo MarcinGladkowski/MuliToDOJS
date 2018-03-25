@@ -10,13 +10,27 @@ class Task extends React.Component {
         this.setState({task: props.task})
     }
 
+    removeTask(id){
+        this.removeData(id);
+    }
+
+    removeData(id){
+        fetch(`http://localhost:3000/task/${id}`, {
+            method: 'DELETE',
+            headers: { 
+              'Accept': 'application/json',
+              'Content-Type':'application/json' },
+           // body: JSON.stringify(data)
+          });
+    }  
+
     render(){
         return(
-            <li data-id="#" className="">
+            <li data-id={this.state.task._id} className="">
                         <div className="view">
                             <input className="toggle" type="checkbox"/>
                             <label>{this.state.task.title}</label>
-                            <button className="destroy"></button>
+                            <button className="destroy" onClick={() => this.removeTask(this.state.task._id)}></button>
                         </div>
                         <input className="edit"/>
              </li> 
