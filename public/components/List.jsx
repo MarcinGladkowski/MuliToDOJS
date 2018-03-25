@@ -16,6 +16,7 @@ export default class List extends React.Component {
           };
         this.reloadList=this.reloadList;
         this.removeTask=this.removeTask;
+        this.updateTask=this.updateTask;
     }
 
     reloadList(){
@@ -25,15 +26,6 @@ export default class List extends React.Component {
     removeTask(id){
         this.removeData(id);
     }
-
-    removeData(id){
-        fetch(`${urlTask}/${id}`, {
-            method: 'DELETE',
-            headers: { 
-              'Accept': 'application/json',
-              'Content-Type':'application/json' },
-          });
-    }  
 
     loadTasks(){
         fetch(urlTask)
@@ -82,6 +74,24 @@ export default class List extends React.Component {
           .then(() => this.reloadList());
     }  
 
+    updateTask(task){
+
+        task.completed  = !!((task.completed  == false));
+
+        fetch(urlTask, {
+            method: 'PUT',
+            headers: { 
+              'Accept': 'application/json',
+              'Content-Type':'application/json' },
+            body: JSON.stringify(task)
+          })
+          .then(
+              () => {this.reloadList()
+              console.log('zmiana komleted - przeladowanie listy');
+              }
+            );
+    } 
+
     render(){
         return( 
             <div>
@@ -94,7 +104,7 @@ export default class List extends React.Component {
                     <label>Mark all as complete</label>
                         <ul className="todo-list">
                             {this.state.tasks.map((task, i) => (
-                                <Task key={i} task={task} reloadList={() => this.reloadList()} removeTask={() => this.removeTask(task._id)} />
+                                <Task key={i} task={task} reloadList={() => this.reloadList()} removeTask={() => this.removeTask(task._id)} updateTask={() => this.updateTask(task)}/>
                             ))}
                         </ul>
                 </section>

@@ -19,7 +19,7 @@ router.post('/task', (req, res) => {
         if (err) return res.send(500, { error: err });
         return res.status(200).send(newTask);
       });
-      
+
 });
 
 router.delete('/task/:taskId', (req, res) => {
@@ -34,7 +34,7 @@ router.delete('/task/:taskId', (req, res) => {
 router.put('/task', (req, res) => {
     Task.findByIdAndUpdate(req.body._id, req.body, {new: true}, function(err, model){
         if (err) return res.send(500, { error: err });
-        return res.status(200).send('ok');
+        return res.status(200).send(Task);
     }); 
 });
 
