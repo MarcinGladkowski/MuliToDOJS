@@ -12,12 +12,26 @@ export default class List extends React.Component {
             isLoaded: false,
             tasks: [],
           };
-        this.reloadList=this.reloadList.bind(this);
+        this.reloadList=this.reloadList;
+        this.removeTask=this.removeTask;
     }
 
     reloadList(){
         this.loadTasks();
     }
+
+    removeTask(id){
+        this.removeData(id);
+    }
+
+    removeData(id){
+        fetch(`http://localhost:3000/task/${id}`, {
+            method: 'DELETE',
+            headers: { 
+              'Accept': 'application/json',
+              'Content-Type':'application/json' },
+          });
+    }  
 
     loadTasks(){
         fetch("http://localhost:3000/task")
@@ -53,9 +67,17 @@ export default class List extends React.Component {
             body: JSON.stringify(data)
           })
           .then(res => res.json())
-          .then(result => {
-              this.loadTasks();
-          });
+          .then(result => {this.reloadList()});
+    } 
+    
+    removeData(id){
+        fetch(`http://localhost:3000/task/${id}`, {
+            method: 'DELETE',
+            headers: { 
+              'Accept': 'application/json',
+              'Content-Type':'application/json' },
+          })
+          .then(() => this.reloadList());
     }  
 
     render(){
@@ -70,7 +92,7 @@ export default class List extends React.Component {
                     <label>Mark all as complete</label>
                         <ul className="todo-list">
                             {this.state.tasks.map((task, i) => (
-                                <Task key={i} task={task} reloadList={this.reloadList} />
+                                <Task key={i} task={task} reloadList={() => this.reloadList()} removeTask={() => this.removeTask(task._id)} />
                             ))}
                         </ul>
                 </section>

@@ -19,14 +19,16 @@ router.post('/task', (req, res) => {
         if (err) return res.send(500, { error: err });
         return res.status(200).send(newTask);
       });
+      
 });
 
 router.delete('/task/:taskId', (req, res) => {
 
     Task.remove({ _id: req.params.taskId }, function (err) {
         if (err) return res.send(500, { error: err });
-        return res.status(200).send('ok');
+        return res.status(200).send(Task);
       });   
+
 });
 
 router.put('/task', (req, res) => {
