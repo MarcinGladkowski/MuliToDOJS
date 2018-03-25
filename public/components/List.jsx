@@ -4,6 +4,8 @@ import Task from './Task.jsx';
 import '../css/base.css';
 import '../css/index.css';
 
+const urlTask = "http://localhost:3000/task";
+
 export default class List extends React.Component {
     constructor(props){
         super(props);
@@ -25,7 +27,7 @@ export default class List extends React.Component {
     }
 
     removeData(id){
-        fetch(`http://localhost:3000/task/${id}`, {
+        fetch(`${urlTask}/${id}`, {
             method: 'DELETE',
             headers: { 
               'Accept': 'application/json',
@@ -34,7 +36,7 @@ export default class List extends React.Component {
     }  
 
     loadTasks(){
-        fetch("http://localhost:3000/task")
+        fetch(urlTask)
         .then(res => res.json())
         .then(
           (result) => {
@@ -59,7 +61,7 @@ export default class List extends React.Component {
     };
 
     saveTask(data){
-        fetch('http://localhost:3000/task', {
+        fetch(urlTask, {
             method: 'POST',
             headers: { 
               'Accept': 'application/json',
@@ -71,7 +73,7 @@ export default class List extends React.Component {
     } 
     
     removeData(id){
-        fetch(`http://localhost:3000/task/${id}`, {
+        fetch(`${urlTask}/${id}`, {
             method: 'DELETE',
             headers: { 
               'Accept': 'application/json',

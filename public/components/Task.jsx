@@ -20,7 +20,7 @@ export default class Task extends React.Component {
                             <label>{this.state.task.title}</label>
                             <button className="destroy" onClick={() => this.props.removeTask()}></button>
                         </div>
-                        <input className="edit"/>
+                <input className="edit"/>
              </li> 
         )
     }
