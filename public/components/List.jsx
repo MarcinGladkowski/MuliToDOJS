@@ -85,11 +85,7 @@ export default class List extends React.Component {
               'Content-Type':'application/json' },
             body: JSON.stringify(task)
           })
-          .then(
-              () => {this.reloadList()
-              console.log('zmiana komleted - przeladowanie listy');
-              }
-            );
+          .then(() => this.reloadList());
     } 
 
     render(){
