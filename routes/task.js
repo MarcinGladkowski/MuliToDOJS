@@ -17,7 +17,7 @@ router.post('/task', (req, res) => {
 
     newTask.save(function (err, task) {
         if (err) return res.send(500, { error: err });
-        return res.status(200).send('ok');
+        return res.status(200).send(newTask);
       });
 });
 

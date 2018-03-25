@@ -40,7 +40,6 @@ export default class List extends React.Component {
     newTask(event){
         if(event.key === 'Enter'){
             this.saveTask({title: event.target.value, completed: false});
-            this.loadTasks();
             event.target.value = "";
         }
     };
@@ -52,6 +51,10 @@ export default class List extends React.Component {
               'Accept': 'application/json',
               'Content-Type':'application/json' },
             body: JSON.stringify(data)
+          })
+          .then(res => res.json())
+          .then(result => {
+              this.loadTasks();
           });
     }  
 
