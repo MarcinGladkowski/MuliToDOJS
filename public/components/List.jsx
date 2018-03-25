@@ -12,6 +12,12 @@ class List extends React.Component {
             isLoaded: false,
             tasks: []
           };
+        this.reloadList=this.reloadList.bind(this);
+    }
+
+    reloadList(){
+        console.log('callback working');
+        this.loadTasks();
     }
 
     loadTasks(){
@@ -61,7 +67,7 @@ class List extends React.Component {
                     <label>Mark all as complete</label>
                         <ul className="todo-list">
                             {this.state.tasks.map((task, i) => (
-                                <Task key={i} task={task} />
+                                <Task key={i} task={task} reloadList={this.reloadList} />
                             ))}
                         </ul>
                 </section>

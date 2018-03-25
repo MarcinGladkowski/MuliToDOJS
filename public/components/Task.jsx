@@ -11,6 +11,7 @@ class Task extends React.Component {
     }
 
     removeTask(id){
+        this.props.reloadList();
         this.removeData(id);
     }
 
@@ -20,7 +21,6 @@ class Task extends React.Component {
             headers: { 
               'Accept': 'application/json',
               'Content-Type':'application/json' },
-           // body: JSON.stringify(data)
           });
     }  
 
